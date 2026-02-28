@@ -1,0 +1,127 @@
+<!-- src/EndfieldEssenceOverlay/SettingsWindow.xaml -->
+<mah:MetroWindow x:Class="EndfieldEssenceOverlay.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="설정"
+        Width="500" Height="650"
+        MinWidth="420" MinHeight="500"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowStartupLocation="CenterOwner"
+        TitleCharacterCasing="Normal">
+
+    <TabControl BorderThickness="0" Margin="0">
+
+        <!-- ── 설정 탭 ── -->
+        <TabItem Header="설정">
+            <StackPanel Margin="14,10,14,14">
+
+                <TextBlock Text="디버그" FontSize="17" Foreground="#E0E0E0" Margin="0,0,0,4"/>
+                <CheckBox x:Name="DebugTextCheck"
+                          Content="감지 키워드 패널 표시" FontSize="18"
+                          Checked="DebugTextCheck_Changed"
+                          Unchecked="DebugTextCheck_Changed"/>
+                <CheckBox x:Name="DebugImageCheck"
+                          Content="캡처 이미지 표시" FontSize="18"
+                          Margin="0,4,0,0"
+                          Checked="DebugImageCheck_Changed"
+                          Unchecked="DebugImageCheck_Changed"/>
+
+                <Separator Margin="0,12,0,8"/>
+
+                <TextBlock Text="스캔" FontSize="17" Foreground="#E0E0E0" Margin="0,0,0,8"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="캡처 주기" FontSize="18"
+                               VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBox x:Name="PollIntervalBox"
+                             Width="80" Height="34" FontSize="18"
+                             VerticalContentAlignment="Center"
+                             Padding="4,0"
+                             LostFocus="PollIntervalBox_LostFocus"/>
+                    <TextBlock Text=" ms" FontSize="18" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <Separator Margin="0,12,0,8"/>
+
+                <TextBlock Text="캡처 대상" FontSize="17" Foreground="#E0E0E0" Margin="0,0,0,8"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <ComboBox x:Name="WindowCombo" Width="280" Height="34" FontSize="16"
+                              IsEditable="True"
+                              SelectionChanged="WindowCombo_SelectionChanged"
+                              LostFocus="WindowCombo_LostFocus"/>
+                    <Button x:Name="RefreshWindowsBtn" Content="🔄" FontSize="16"
+                            Margin="6,0,0,0" Width="36" Height="34"
+                            Click="RefreshWindowsBtn_Click"/>
+                </StackPanel>
+
+                <Separator Margin="0,12,0,8"/>
+
+                <TextBlock Text="화면" FontSize="17" Foreground="#E0E0E0" Margin="0,0,0,8"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="오버레이 불투명도" FontSize="18"
+                               VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <Slider x:Name="OpacitySlider"
+                            Width="180" Height="36" Minimum="30" Maximum="100" Value="80"
+                            VerticalAlignment="Center"
+                            ValueChanged="OpacitySlider_ValueChanged"/>
+                    <TextBlock x:Name="OpacityLabel"
+                               Text="80%" Width="48" FontSize="18"
+                               VerticalAlignment="Center" Margin="6,0,0,0"/>
+                </StackPanel>
+
+                <Separator Margin="0,12,0,8"/>
+
+                <TextBlock Text="캡처 영역" FontSize="17" Foreground="#E0E0E0" Margin="0,0,0,8"/>
+                <Button Content="📐  캡처 범위 재설정 (F8)"
+                        FontSize="18"
+                        HorizontalAlignment="Left"
+                        Click="CalibrateButton_Click"/>
+            </StackPanel>
+        </TabItem>
+
+        <!-- ── 보유 목록 탭 ── -->
+        <TabItem Header="보유 목록">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer Grid.Row="0" MaxHeight="400"
+                              VerticalScrollBarVisibility="Auto"
+                              Margin="14,10,14,0">
+                    <StackPanel x:Name="WeaponListPanel"/>
+                </ScrollViewer>
+
+                <Grid Grid.Row="1" Margin="14,8,14,12">
+                    <Button Content="🗑 초기화"
+                            HorizontalAlignment="Left"
+                            FontSize="18"
+                            Foreground="#F8F546"
+                            Click="ResetOwnedButton_Click"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Button Content="저장" FontSize="18" Margin="0,0,8,0"
+                                Click="SaveOwnedButton_Click"/>
+                        <Button Content="취소" FontSize="18"
+                                Click="CancelOwnedButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <!-- ── 도움말 탭 ── -->
+        <TabItem Header="도움말">
+            <ScrollViewer MaxHeight="400" Margin="14,10,14,14"
+                          VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="HelpText"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           LineHeight="30"/>
+            </ScrollViewer>
+        </TabItem>
+
+    </TabControl>
+</mah:MetroWindow>

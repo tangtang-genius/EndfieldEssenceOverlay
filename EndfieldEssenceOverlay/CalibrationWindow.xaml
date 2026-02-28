@@ -1,0 +1,34 @@
+<!-- src/EndfieldEssenceOverlay/CalibrationWindow.xaml -->
+<Window x:Class="EndfieldEssenceOverlay.CalibrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="캘리브레이션"
+        WindowState="Maximized"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#80313739"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Cursor="Cross"
+        MouseDown="Window_MouseDown"
+        MouseMove="Window_MouseMove"
+        MouseUp="Window_MouseUp"
+        KeyDown="Window_KeyDown">
+    <Canvas x:Name="DrawCanvas">
+        <!-- 상단 안내 텍스트 -->
+        <TextBlock Canvas.Left="0" Canvas.Top="20"
+                   Width="800"
+                   Text="캡처 영역을 드래그하여 지정하세요  |  ESC = 취소"
+                   FontFamily="Malgun Gothic" FontSize="23" FontWeight="Bold"
+                   Foreground="#FFFFFF" Background="#AA313739"
+                   Padding="16,8" TextAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+        <!-- 드래그 선택 영역 (노란 점선 사각형) -->
+        <Rectangle x:Name="SelectRect"
+                   Stroke="#F8F546" StrokeThickness="2"
+                   StrokeDashArray="6 3"
+                   Fill="#33F8F546"
+                   Visibility="Collapsed"/>
+    </Canvas>
+</Window>
