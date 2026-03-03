@@ -363,7 +363,7 @@ public partial class MainWindow : Window
     private void OnDebugCaptureImage(byte[] pngBytes)
         => _debugImage?.UpdateImage(pngBytes);
 
-    private void OnDebugKeywords(List<string> lines, List<Services.MatchCandidate> top3)
+    private void OnDebugKeywords(List<string> lines, List<Services.MatchCandidate> candidates)
     {
         Dispatcher.Invoke(() =>
         {
@@ -372,9 +372,9 @@ public partial class MainWindow : Window
                 parts.Add("감지: " + string.Join(", ", lines));
             else
                 parts.Add("(감지된 키워드 없음)");
-            if (top3.Count > 0)
-                parts.Add("Top3: " + string.Join(" | ",
-                    top3.Select(c => $"{c.Keyword} {c.Score:F3}")));
+            if (candidates.Count > 0)
+                parts.Add("Top: " + string.Join(" | ",
+                    candidates.Select(c => $"{c.Keyword} {c.Score:F3}")));
             DebugText.Text = string.Join("\n", parts);
         });
     }

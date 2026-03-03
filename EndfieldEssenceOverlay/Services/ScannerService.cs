@@ -88,7 +88,7 @@ public class ScannerService : IDisposable
 
         if (Config.ShowDebugText)
         {
-            var top3 = _templateMatcher.LastCandidates.Take(3).ToList();
+            var top3 = _templateMatcher.LastCandidates.Take(10).ToList();
             Application.Current.Dispatcher.Invoke(
                 () => DebugKeywords?.Invoke(lines, top3));
         }
